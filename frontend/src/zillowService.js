@@ -1,12 +1,9 @@
 import axios from "axios";
-import { API_KEY, BASE_URL } from "./apiConfig";
 
 const zillowService = axios.create({
-	baseURL: BASE_URL,
+	baseURL: import.meta.env.VITE_API_BASE_URL, // Use the environment variable
 	headers: {
 		"Content-Type": "application/json",
-		"X-RapidAPI-Key": API_KEY,
-		"X-RapidAPI-Host": "zillow-working-api.p.rapidapi.com",
 	},
 });
 

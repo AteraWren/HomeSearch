@@ -126,14 +126,12 @@ pytest
 
 Ensure that the test database is configured in your `.env` file.
 
-```need to adjust after deployment works!
 ## Deployed App
 
 You can access the deployed app at the following link:
 
-[Home Rental App](https://your-frontend-service.onrender.com)
+[Home Rental App](https://homesearch-frontend.onrender.com)
 
 The API is available at:
 
-[Home Rental App API](https://your-backend-service.onrender.com)
-```
+[Home Rental App API](https://homesearch-px45.onrender.com)
