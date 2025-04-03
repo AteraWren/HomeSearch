@@ -45,12 +45,12 @@ export const getPropertiesByURL = async (url) => {
 export const getPropertiesByAddress = async (address) => {
 	const options = {
 		method: "GET",
-		url: "https://zillow-working-api.p.rapidapi.com/pro/byaddress",
+		url: `${import.meta.env.VITE_API_BASE_URL}/pro/byaddress`,
 		params: {
 			propertyaddress: address,
 		},
 		headers: {
-			"x-rapidapi-key": API_KEY,
+			"x-rapidapi-key": import.meta.env.VITE_API_KEY,
 			"x-rapidapi-host": "zillow-working-api.p.rapidapi.com",
 		},
 	};

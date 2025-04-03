@@ -116,6 +116,14 @@ JWT_SECRET_KEY=your_jwt_secret_key
 
 Replace `username`, `password`, and `your_secret_key` with your actual database credentials and secret keys.
 
+### Frontend Environment Variables
+
+Create a `.env` file in the `frontend` directory with the following content:
+
+```env
+VITE_API_BASE_URL=https://homesearch-px45.onrender.com
+```
+
 ### Running Tests
 
 To run the tests for the backend, use the following command:

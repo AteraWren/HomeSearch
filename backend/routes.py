@@ -4,6 +4,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from sqlalchemy.exc import IntegrityError
 from psycopg2.errors import UniqueViolation
 from .models import db, User, Post
+import re
 
 routes = Blueprint('routes', __name__)
 CORS(routes)
@@ -15,22 +16,23 @@ def index():
 @routes.route('/register', methods=['POST'])
 def register():
     try:
-        print("Received request to /register")
         data = request.json
-        print("Request data:", data)
-        
-        # Validate the request data
-        if not data or not data.get('username') or not data.get('email') or not data.get('password'):
-            return jsonify({'error': 'Invalid request data'}), 400
-        
-        user = User(username=data['username'], email=data['email'])
-        user.set_password(data['password'])  # Hash the password
-        print("Created user:", user)
-        
+        email = data.get('email')
+        password = data.get('password')
+
+        # Validate email format
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            return jsonify({'error': 'Invalid email format'}), 400
+
+        # Validate password strength
+        if len(password) < 8:
+            return jsonify({'error': 'Password must be at least 8 characters long'}), 400
+
+        user = User(username=data['username'], email=email)
+        user.set_password(password)
         db.session.add(user)
         db.session.commit()
-        print("User added to the database")
-        
+
         access_token = create_access_token(identity=user.id)
         return jsonify({'message': 'User registered successfully', 'access_token': access_token}), 201
     except IntegrityError as e:
@@ -40,10 +42,7 @@ def register():
         return jsonify({'error': 'Database error'}), 500
     except Exception as e:
         db.session.rollback()
-        print("Error:", str(e))
-        print("App instance in route:", current_app)
-        print("SQLAlchemy instance in route:", db)
-        return jsonify({'error': 'Database error'}), 500
+        return jsonify({'error': 'An unexpected error occurred'}), 500
 
 @routes.route('/login', methods=['POST'])
 def login():

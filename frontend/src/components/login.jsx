@@ -38,11 +38,8 @@ const Login = () => {
       }
     } catch (err) {
       console.error('Error during submission:', err);
-      if (isLogin) {
-        setError('Login failed');
-      } else {
-        setError('Registration failed due to duplicate email');
-      }
+      const errorMessage = err.response?.data?.error || 'An unexpected error occurred';
+      setError(errorMessage);
     }
   };
 

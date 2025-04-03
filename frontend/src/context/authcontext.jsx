@@ -16,25 +16,25 @@ const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://127.0.0.1:5000/login', { email, password });
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/login`, { email, password });
       const { access_token } = response.data;
       localStorage.setItem('token', access_token);
       setAuth({ token: access_token });
     } catch (error) {
       console.error('Login failed:', error);
-      throw error; // Throw the error to be caught in the handleSubmit function
+      throw error;
     }
   };
 
   const register = async (username, email, password) => {
     try {
-      const response = await axios.post('http://127.0.0.1:5000/register', { username, email, password });
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/register`, { username, email, password });
       const { access_token } = response.data;
       localStorage.setItem('token', access_token);
       setAuth({ token: access_token });
     } catch (error) {
       console.error('Registration failed:', error);
-      throw error; // Throw the error to be caught in the handleSubmit function
+      throw error;
     }
   };
 
