@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from .config import Config
 
 db = SQLAlchemy()
@@ -15,6 +16,7 @@ jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
+    CORS(app, origins=["https://homesearch-frontend.onrender.com"])  # Enable CORS for specific origins
     app.config.from_object(Config)
 
     print("Database URI:", os.getenv('DATABASE_URL'))

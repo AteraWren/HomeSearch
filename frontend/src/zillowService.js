@@ -77,6 +77,23 @@ export const getPropertyDetails = async (propertyId) => {
 	}
 };
 
+export const register = async (username, email, password) => {
+	try {
+		const response = await axios.post(
+			`${import.meta.env.VITE_API_BASE_URL}/register`,
+			{
+				username,
+				email,
+				password,
+			}
+		);
+		return response.data;
+	} catch (error) {
+		console.error("Registration failed:", error);
+		throw error;
+	}
+};
+
 // Test with a known working address
 getPropertiesByAddress("1875 AVONDALE Circle, Jacksonville, FL 32205")
 	.then((data) => console.log(data))
