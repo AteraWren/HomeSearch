@@ -27,7 +27,7 @@ export const getPropertiesByURL = async (url) => {
 			url: url,
 		},
 		headers: {
-			"x-rapidapi-key": API_KEY,
+			"x-rapidapi-key": import.meta.env.VITE_API_KEY, // Use the environment variable
 			"x-rapidapi-host": "zillow-com-property-data.p.rapidapi.com",
 		},
 	};
