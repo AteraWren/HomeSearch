@@ -19,10 +19,6 @@ def create_app():
     CORS(app, origins=["https://homesearch-frontend.onrender.com"])  # Enable CORS for specific origins
     app.config.from_object(Config)
 
-    print("Database URI:", os.getenv('DATABASE_URL'))
-    print("Secret Key:", os.getenv('SECRET_KEY'))
-    print("JWT Secret Key:", os.getenv('JWT_SECRET_KEY'))
-
     db.init_app(app)
     migrate.init_app(app, db)
     bcrypt.init_app(app)
@@ -32,9 +28,5 @@ def create_app():
     from .models import User, Post
     from .routes import routes as routes_blueprint
     app.register_blueprint(routes_blueprint)
-
-    print("App and SQLAlchemy instance initialized")
-    print("App instance:", app)
-    print("SQLAlchemy instance:", db)
 
     return app
