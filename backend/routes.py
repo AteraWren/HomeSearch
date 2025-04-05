@@ -11,7 +11,7 @@ CORS(routes)
 
 @routes.route('/')
 def index():
-    return jsonify({'message': 'Welcome to the Home Rental App API'})
+    return jsonify({'message': 'Welcome to the Home Search API'})
 
 @routes.route('/register', methods=['POST'])
 def register():

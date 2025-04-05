@@ -1,145 +1,93 @@
-# Home Rental App
+Home Search
+Welcome to the Home Search App! This application allows users to register, log in, and manage rental properties.
 
-Welcome to the Home Rental App! This application allows users to register, log in, and manage rental properties.
-
-## API Link
-
+Features
+User registration and login
+JWT authentication
+Manage rental properties
+View rental property listings
+API Link
 You can access the API at the following link:
 
-[Home Rental App API](http://127.0.0.1:5000/)
+https://homesearch-px45.onrender.com
 
-## Features
+Deployed App
+You can access the deployed app at the following link:
 
-- User registration and login
-- JWT authentication
-- Manage rental properties
-- View rental property listings
+https://homesearch-frontend.onrender.com
 
-## Getting Started
-
+Getting Started
 To get started with the project, follow these steps:
 
-1. Clone the repository
-2. Install dependencies
-3. Set up the database
-4. Run the application
+Prerequisites
+Python 3.8 or higher
+Node.js and npm (for the frontend)
+PostgreSQL
+Backend Setup
+Clone the repository: git clone https://github.com/your-username/home-rental-app.git cd home-rental-app
 
-## Installation
+Navigate to the backend directory: cd backend
 
-```sh
-git clone https://github.com/AteraWren/home-rental-app.git
-cd home-rental-app
-pip install -r requirements.txt
-```
+Create a virtual environment: python -m venv venv
 
-### Backend Setup
+Activate the virtual environment:
 
-1. Navigate to the `backend` directory:
+On Windows: venv\Scripts\activate
+On macOS/Linux: source venv/bin/activate
+Install the required dependencies: pip install -r requirements.txt
 
-   ```sh
-   cd backend
-   ```
+Set up the database:
 
-2. Create a virtual environment:
+Ensure PostgreSQL is running and create a database: CREATE DATABASE Home_rental;
+Run database migrations: flask db upgrade
 
-   ```sh
-   python -m venv venv
-   ```
+Start the backend server: flask run
 
-3. Activate the virtual environment:
+The backend will be available at http://127.0.0.1:5000/.
 
-   - On Windows:
-     ```sh
-     venv\Scripts\activate
-     ```
-   - On macOS/Linux:
-     ```sh
-     source venv/bin/activate
-     ```
+Frontend Setup
+Navigate to the frontend directory: cd frontend
 
-4. Install the required dependencies:
+Install the required dependencies: npm install
 
-   ```sh
-   pip install -r requirements.txt
-   ```
+Start the development server: npm run dev
 
-5. Set up the database:
+The frontend will be available at http://127.0.0.1:5173/.
 
-   - Ensure PostgreSQL is running and create a database:
-     ```sql
-     CREATE DATABASE Home_rental;
-     ```
+Environment Variables
+Backend .env File
+Create a .env file in the backend directory with the following content:
 
-6. Run database migrations:
-
-   ```sh
-   flask db upgrade
-   ```
-
-7. Start the backend server:
-   ```sh
-   flask run
-   ```
-
-The backend will be available at `http://127.0.0.1:5000/`.
-
-### Frontend Setup
-
-1. Navigate to the `frontend` directory:
-
-   ```sh
-   cd frontend
-   ```
-
-2. Install the required dependencies:
-
-   ```sh
-   npm install
-   ```
-
-3. Start the development server:
-   ```sh
-   npm run dev
-   ```
-
-The frontend will be available at `http://127.0.0.1:5173/`.
-
-### Environment Variables
-
-Create a `.env` file in the root of the project with the following content:
-
-```env
 DATABASE_URL=postgresql://username:password@localhost:5432/Home_rental
 SECRET_KEY=your_secret_key
 JWT_SECRET_KEY=your_jwt_secret_key
-```
 
-Replace `username`, `password`, and `your_secret_key` with your actual database credentials and secret keys.
+Replace username, password, and your_secret_key with your actual database credentials and secret keys.
 
-### Frontend Environment Variables
+Frontend .env File
+Create a .env file in the frontend directory with the following content:
 
-Create a `.env` file in the `frontend` directory with the following content:
+VITE_API_BASE_URL=http://127.0.0.1:5000
 
-```env
+If deploying the frontend, replace the VITE_API_BASE_URL with the deployed backend URL, such as:
+
 VITE_API_BASE_URL=https://homesearch-px45.onrender.com
-```
 
-### Running Tests
-
+Running Tests
 To run the tests for the backend, use the following command:
 
-```sh
 pytest
-```
 
-Ensure that the test database is configured in your `.env` file.
+Ensure that the test database is configured in your .env file.
 
-## Deployed App
+Deployment
+Backend Deployment
+Ensure all environment variables are set in your deployment environment (e.g., Render, Heroku).
+Push your code to the remote repository.
+Run database migrations in the production environment:
+flask db upgrade
+Frontend Deployment
+Build the frontend for production:
+npm run build
 
-You can access the deployed app at the following link:
-
-[Home Rental App](https://homesearch-frontend.onrender.com)
-
-The API is available at:
-
-[Home Rental App API](https://homesearch-px45.onrender.com)
+Deploy the dist/ folder to your hosting platform (e.g., Netlify, Vercel).
