@@ -1,0 +1,176 @@
+/* src/components/PropertySearch.css */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: url('/path/to/your/background-image.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-width: 320px;
+  position: relative;
+  padding-top: 60px; /* Add padding to create space below the navbar */
+}
+
+.property-search-container {
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent background for readability */
+  padding: 20px;
+  width: 100%;
+  max-width: 800px; /* Set a maximum width for the container */
+  height: calc(100vh - 80px); /* Set a fixed height for the container */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 20px auto; /* Center the container horizontally and add margin for spacing */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  position: relative; /* Ensure the container is positioned correctly */
+  z-index: 1; /* Ensure the container is above the background */
+  overflow-y: auto; /* Enable vertical scrolling within the container */
+}
+
+.property-search-title {
+  font-family: 'Georgia', serif;
+  font-size: 2em;
+  color: #ffcc00;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0; /* Remove any margin */
+  margin-bottom: 20px;
+}
+
+.property-search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 300px;
+}
+
+.property-search-button {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.6); /* Match the background color */
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+  border: none; /* Remove the border */
+}
+
+.property-search-button:hover {
+  background-color: #ffcc00; /* Change the background color on hover */
+  color: #000; /* Change the text color on hover */
+}
+
+.property-search-img {
+  display: block;
+  max-width: 100%;
+  max-height: 400px;
+  height: auto;
+  margin: 0 auto 20px auto; /* Center the photo horizontally and add margin at the bottom */
+  border-radius: 5px;
+  object-fit: cover; /* Ensure the image covers the container without stretching */
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+}
+
+.property-search-img-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 90%; /* Ensure the container width matches the image width */
+  height: 300px; /* Set a fixed height for the image container */
+  margin: 0 auto 20px auto; /* Center the container horizontally and add margin at the bottom */
+  overflow: hidden; /* Hide any overflow */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.property-search-img-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.property-search-img-button-left {
+  left: 10px;
+}
+
+.property-search-img-button-right {
+  right: 10px;
+}
+
+.property-search-img-button:hover {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.property-search p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.property-search a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.property-search a:hover {
+  text-decoration: underline;
+}
+
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+}
+
+.modal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 800px; /* Maximum width */
+  background-color: white;
+  border-radius: 10px;
+  text-align: center; /* Center the content */
+}
+
+.modal-img {
+  max-width: 100%;
+  max-height: 80vh; /* Ensure the image fits within the viewport */
+  border-radius: 10px;
+}
+
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
