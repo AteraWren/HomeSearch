@@ -1,10 +1,10 @@
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env file
-load_dotenv()
+# Explicitly specify the path to the .env file in the backend folder
+dotenv_path = os.path.join(os.path.dirname(__file__), '/backend.env')
+load_dotenv(dotenv_path)
 
-print("Database URI:", os.getenv('DATABASE_URL'))
 
 class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')

@@ -17,31 +17,42 @@ def index():
 def register():
     try:
         data = request.json
+        print("Received data:", data)  # Debug log
         email = data.get('email')
         password = data.get('password')
+        username = data.get('username')
+
+        if not username or not email or not password:
+            print("Missing fields")  # Debug log
+            return jsonify({'error': 'All fields are required'}), 400
 
         # Validate email format
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            print("Invalid email format")  # Debug log
             return jsonify({'error': 'Invalid email format'}), 400
 
         # Validate password strength
         if len(password) < 8:
+            print("Weak password")  # Debug log
             return jsonify({'error': 'Password must be at least 8 characters long'}), 400
 
-        user = User(username=data['username'], email=email)
+        user = User(username=username, email=email)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
 
         access_token = create_access_token(identity=user.id)
+        print("User registered successfully")  # Debug log
         return jsonify({'message': 'User registered successfully', 'access_token': access_token}), 201
     except IntegrityError as e:
         db.session.rollback()
+        print("IntegrityError:", e)  # Debug log
         if isinstance(e.orig, UniqueViolation):
             return jsonify({'error': 'Registration failed due to duplicate email'}), 400
         return jsonify({'error': 'Database error'}), 500
     except Exception as e:
         db.session.rollback()
+        print("Unexpected error:", e)  # Debug log
         return jsonify({'error': 'An unexpected error occurred'}), 500
 
 @routes.route('/login', methods=['POST'])
@@ -79,3 +90,12 @@ def add_post():
     except Exception as e:
         db.session.rollback()
         return jsonify({'error': 'Database error'}), 500
+
+@routes.route('/pro/byaddress', methods=['GET'])
+def get_property_by_address():
+    address = request.args.get('propertyaddress')
+    if not address:
+        return jsonify({'error': 'Address parameter is required'}), 400
+
+    # Example logic to fetch property details
+    return jsonify({'message': f'Property details for {address}'})
