@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/home';
 import Auth from './components/auth';
-import PostForm from './components/postform';
 import Dashboard from './pages/dashboard';
 import Navbar from './components/navbar';
 import Login from './components/login';

@@ -1,11 +1,11 @@
 Home Search
-Welcome to the Home Search App! This application allows users to register, log in, and manage rental properties.
+Welcome to the Home Search App! This application allows users to register, log in, and view properties.
 
 Features
 User registration and login
 JWT authentication
-Manage rental properties
-View rental property listings
+view properties
+View property prices
 
 API Link
 You can access the API at the following link:

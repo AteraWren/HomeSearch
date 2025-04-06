@@ -27,7 +27,7 @@ def create_app():
     login_manager.init_app(app)
     jwt.init_app(app)
 
-    from .models import User, Post
+    from .models import User
     from .routes import routes as routes_blueprint
     app.register_blueprint(routes_blueprint)
 

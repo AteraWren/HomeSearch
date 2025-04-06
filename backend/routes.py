@@ -22,6 +22,7 @@ def register():
         password = data.get('password')
         username = data.get('username')
 
+        # Validate input fields
         if not username or not email or not password:
             print("Missing fields")  # Debug log
             return jsonify({'error': 'All fields are required'}), 400
@@ -36,60 +37,60 @@ def register():
             print("Weak password")  # Debug log
             return jsonify({'error': 'Password must be at least 8 characters long'}), 400
 
+        # Create a new user
         user = User(username=username, email=email)
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
 
+        # Generate access token
         access_token = create_access_token(identity=user.id)
         print("User registered successfully")  # Debug log
         return jsonify({'message': 'User registered successfully', 'access_token': access_token}), 201
+
     except IntegrityError as e:
         db.session.rollback()
         print("IntegrityError:", e)  # Debug log
         if isinstance(e.orig, UniqueViolation):
-            return jsonify({'error': 'Registration failed due to duplicate email'}), 400
-        return jsonify({'error': 'Database error'}), 500
+            return jsonify({'error': 'Registration failed: email or username already exists'}), 400
+        return jsonify({'error': 'Database error occurred'}), 500
+
     except Exception as e:
         db.session.rollback()
         print("Unexpected error:", e)  # Debug log
-        return jsonify({'error': 'An unexpected error occurred'}), 500
+        return jsonify({'error': f'An unexpected error occurred: {str(e)}'}), 500
 
 @routes.route('/login', methods=['POST'])
 def login():
-    data = request.json
-    user = User.query.filter_by(email=data['email']).first()
-    if user and user.check_password(data['password']):
-        access_token = create_access_token(identity=user.id)
-        return jsonify(access_token=access_token), 200
-    return jsonify({'error': 'Invalid credentials'}), 401
+    try:
+        data = request.json
+        email = data.get('email')
+        password = data.get('password')
+
+        # Validate input fields
+        if not email or not password:
+            return jsonify({'error': 'Email and password are required'}), 400
+
+        # Find user by email
+        user = User.query.filter_by(email=email).first()
+        if user and user.check_password(password):
+            access_token = create_access_token(identity=user.id)
+            return jsonify({'access_token': access_token}), 200
+
+        return jsonify({'error': 'Invalid email or password'}), 401
+
+    except Exception as e:
+        print("Unexpected error during login:", e)  # Debug log
+        return jsonify({'error': 'An unexpected error occurred'}), 500
 
 @routes.route('/posts', methods=['GET'])
 @jwt_required()
 def get_posts():
-    current_user_id = get_jwt_identity()
-    posts = Post.query.filter_by(user_id=current_user_id).all()
-    posts_list = [{'id': post.id, 'title': post.title, 'description': post.description, 'price': post.price} for post in posts]
-    return jsonify(posts_list)
+    pass  # Remove this route
 
 @routes.route('/add_post', methods=['POST'])
 def add_post():
-    try:
-        data = request.json
-        new_post = Post(
-            title=data['title'],
-            description=data['description'],
-            price=data['price'],
-            location=data['location'],
-            image_url=data['image_url'],
-            user_id=data['user_id']
-        )
-        db.session.add(new_post)
-        db.session.commit()
-        return jsonify({'message': 'Post added successfully'}), 201
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({'error': 'Database error'}), 500
+    pass  # Remove this route
 
 @routes.route('/pro/byaddress', methods=['GET'])
 def get_property_by_address():
