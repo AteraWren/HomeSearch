@@ -38,7 +38,7 @@ Install the required dependencies: pip install -r requirements.txt
 
 Set up the database:
 
-Ensure PostgreSQL is running and create a database: CREATE DATABASE Home_rental;
+Ensure PostgreSQL is running and create a database: CREATE DATABASE Home_search;
 Run database migrations: flask db upgrade
 
 Start the backend server: flask run
@@ -58,7 +58,7 @@ Environment Variables
 Backend .env File
 Create a .env file in the backend directory with the following content:
 
-DATABASE_URL=postgresql://username:password@localhost:5432/Home_rental
+DATABASE_URL=postgresql://username:password@localhost:5432/Home_search
 SECRET_KEY=your_secret_key
 JWT_SECRET_KEY=your_jwt_secret_key
 

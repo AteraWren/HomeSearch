@@ -34,7 +34,6 @@ export const getPropertiesByURL = async (url) => {
 
 	try {
 		const response = await axios.request(options);
-		console.log("Response data:", response.data);
 		return response.data;
 	} catch (error) {
 		console.error("Error searching properties by URL:", error);
@@ -43,9 +42,11 @@ export const getPropertiesByURL = async (url) => {
 };
 
 export const getPropertiesByAddress = async (address) => {
+	const url = `${import.meta.env.VITE_API_BASE_URL}/pro/byaddress`;
+
 	const options = {
 		method: "GET",
-		url: `${import.meta.env.VITE_API_BASE_URL}/pro/byaddress`,
+		url: url,
 		params: {
 			propertyaddress: address,
 		},
@@ -55,11 +56,8 @@ export const getPropertiesByAddress = async (address) => {
 		},
 	};
 
-	console.log("Request options:", options);
-
 	try {
 		const response = await axios.request(options);
-		console.log("Response data:", response.data);
 		return response.data.propertyDetails; // Return the propertyDetails field
 	} catch (error) {
 		console.error("Error searching properties by address:", error);
@@ -93,10 +91,3 @@ export const register = async (username, email, password) => {
 		throw error;
 	}
 };
-
-// Test with a known working address
-getPropertiesByAddress("1875 AVONDALE Circle, Jacksonville, FL 32205")
-	.then((data) => console.log(data))
-	.catch((error) => console.error(error));
-
-// Can add any other API methods as needed
