@@ -24,13 +24,13 @@ export const getProperties = async (query) => {
 export const getPropertiesByURL = async (url) => {
 	const options = {
 		method: "GET",
-		url: `${BASE_URL}/properties_list.php`,
+		url: `${import.meta.env.VITE_API_BASE_URL}/properties_list.php`,
 		params: {
 			url: url,
 		},
 		headers: {
 			"x-rapidapi-key": import.meta.env.VITE_API_KEY, // Use the environment variable
-			"x-rapidapi-host": "zillow-com-property-data.p.rapidapi.com",
+			"x-rapidapi-host": import.meta.env.VITE_API_HOST, // Use the environment variable
 		},
 	};
 
@@ -53,8 +53,8 @@ export const getPropertiesByAddress = async (address) => {
 			propertyaddress: address,
 		},
 		headers: {
-			"x-rapidapi-key": import.meta.env.VITE_API_KEY,
-			"x-rapidapi-host": "zillow-working-api.p.rapidapi.com",
+			"x-rapidapi-key": import.meta.env.VITE_API_KEY, // Use the environment variable
+			"x-rapidapi-host": import.meta.env.VITE_API_HOST, // Use the environment variable
 		},
 	};
 
