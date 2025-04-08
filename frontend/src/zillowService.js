@@ -44,23 +44,19 @@ export const getPropertiesByURL = async (url) => {
 };
 
 export const getPropertiesByAddress = async (address) => {
-	const url = `${import.meta.env.VITE_API_BASE_URL}/pro/byaddress`;
-
+	const url = `https://${import.meta.env.VITE_API_HOST}/pro/byaddress`;
 	const options = {
 		method: "GET",
 		url: url,
-		params: {
-			propertyaddress: address,
-		},
+		params: { propertyaddress: address },
 		headers: {
-			"x-rapidapi-key": import.meta.env.VITE_API_KEY, // Use the environment variable
-			"x-rapidapi-host": import.meta.env.VITE_API_HOST, // Use the environment variable
+			"x-rapidapi-key": import.meta.env.VITE_API_KEY,
+			"x-rapidapi-host": import.meta.env.VITE_API_HOST,
 		},
 	};
-
 	try {
 		const response = await axios.request(options);
-		return response.data.propertyDetails; // Return the propertyDetails field
+		return response.data.propertyDetails;
 	} catch (error) {
 		console.error("Error searching properties by address:", error);
 		throw error;

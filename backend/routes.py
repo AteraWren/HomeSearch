@@ -5,6 +5,8 @@ from sqlalchemy.exc import IntegrityError
 from psycopg2.errors import UniqueViolation
 from .models import db, User, Post
 import re
+import os
+import requests
 
 routes = Blueprint('routes', __name__)
 CORS(routes)
@@ -83,20 +85,29 @@ def login():
         print("Unexpected error during login:", e)  # Debug log
         return jsonify({'error': 'An unexpected error occurred'}), 500
 
-@routes.route('/posts', methods=['GET'])
-@jwt_required()
-def get_posts():
-    pass  # Remove this route
-
-@routes.route('/add_post', methods=['POST'])
-def add_post():
-    pass  # Remove this route
-
 @routes.route('/pro/byaddress', methods=['GET'])
 def get_property_by_address():
-    address = request.args.get('propertyaddress')
-    if not address:
-        return jsonify({'error': 'Address parameter is required'}), 400
+    try:
+        address = request.args.get('propertyaddress')
+        if not address:
+            return jsonify({'error': 'Address parameter is required'}), 400
 
-    # Example logic to fetch property details
-    return jsonify({'message': f'Property details for {address}'})
+        # Make a request to the Zillow API via RapidAPI
+        response = requests.get(
+            "https://zillow-working-api.p.rapidapi.com/byaddress",
+            headers={
+                "x-rapidapi-key": os.getenv("VITE_API_KEY"),
+                "x-rapidapi-host": os.getenv("VITE_API_HOST"),
+            },
+            params={"propertyaddress": address},
+        )
+
+        # Check if the RapidAPI request was successful
+        if response.status_code == 200:
+            return jsonify(response.json()), 200
+        else:
+            return jsonify({'error': 'Failed to fetch property details from RapidAPI'}), response.status_code
+
+    except Exception as e:
+        print("Unexpected error while fetching property details:", e)  # Debug log
+        return jsonify({'error': 'An unexpected error occurred'}), 500
