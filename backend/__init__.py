@@ -16,9 +16,10 @@ jwt = JWTManager()
 
 def create_app():
     app = Flask(__name__)
+    print("Creating Flask app instance...")
     CORS(app)  # Enable CORS for all origins
     app.config.from_object('backend.config.Config')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Atera:saisai123@localhost:5432/Home_search'
+    app.config['SQLALCHEMY_DATABASE_URI'] =  os.getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)

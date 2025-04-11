@@ -2,10 +2,11 @@ Home Search
 Welcome to the Home Search App! This application allows users to register, log in, and view properties.
 
 Features
-User registration and login
-JWT authentication
-view properties
-View property prices
+
+- User registration and login
+- JWT authentication
+- View properties and property prices
+- Secure form handling with Flask-WTF and WTForms
 
 API Link
 You can access the API at the following link:
